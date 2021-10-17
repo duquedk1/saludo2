@@ -1,14 +1,12 @@
-import express from 'express';
+import express from "express";
 
 const app = express();
 
-app.get('/makers/:name', (req, res) => {
-    const {name} = req.params;
-    if(!name || name.length === 0) 
-        res.send(`<h1>Hola desconocido!</h1>`);
-    else {
-        res.send(`<h1>Hola ${name.charAt(0).toUpperCase() + name.slice(1)}!</h1>`);
-    }
+app.get("/makers/:name", (req, res) => {
+  let name = req.params.name;
+  name = name.replace(/^\w/, (c) => c.toUpperCase());
+
+  res.send(`<h1>Hola ${name}!</h1>`);
 });
 
-app.listen(3000, () => console.log('Listening on port 3000'));
+app.listen(3000, () => console.log("Listening on port 3000"));
